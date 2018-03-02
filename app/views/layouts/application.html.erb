@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LiveChatApp</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <a href="/" alt="live chat" class="logo">LiveChat</a>
+        <nav class="navbar navbar-expand-sm navbar-light element-right">
+          <ul class="navbar-nav nav-ul">
+            <li class="nav-item">
+              <% if user_signed_in? %>
+                <%= link_to('Logout', destroy_user_session_path, method: :delete, class: "nav-link") %>
+              <% end %> 
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <h5 class="text-center" style="padding-top: 2%;"><%= current_user.full_name if user_signed_in? %></h5>
+    </header>
+    <div class="content">
+      <%= yield %>
+    </div>
+    <footer>
+      <div class="footer_body">copyright©2018. All Rights Reserved.</div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+<%= form_with(model: message, remote: true, class: "new_message") do |form| %>
+
+  <input name="message[sender_id]" type="hidden" value="<%= current_user.id %>" />
+
+  <div class="form-group">
+    <%= form.text_area :content, id: :message_content, class: "message_content form-control", required: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Send', class: "btn btn-primary" %>
+  </div>
+
+<% end %>

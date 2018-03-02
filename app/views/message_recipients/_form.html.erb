@@ -1,0 +1,32 @@
+<%= form_with(model: message_recipient, local: true) do |form| %>
+  <% if message_recipient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(message_recipient.errors.count, "error") %> prohibited this message_recipient from being saved:</h2>
+
+      <ul>
+      <% message_recipient.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :recipient_id %>
+    <%= form.number_field :recipient_id, id: :message_recipient_recipient_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :message_id %>
+    <%= form.number_field :message_id, id: :message_recipient_message_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :recipient_group_id %>
+    <%= form.number_field :recipient_group_id, id: :message_recipient_recipient_group_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
