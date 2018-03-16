@@ -6,6 +6,7 @@ App.room = App.cable.subscriptions.create "RoomChannel",
     # Called when the subscription has been terminated by the server
 
   received: (data) ->
+    $(".no_message_text").hide();
     $(".messages_body").prepend '<div class="row">' +
       '<div class="col col-sm-12 col-md-12">' +
       '<p><strong>' + data.username + '</strong>' +

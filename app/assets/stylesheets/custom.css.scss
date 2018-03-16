@@ -1,6 +1,6 @@
 html, body {
   background-color: #f4f7f6;
-  margin-bottom: 60px;
+  font-family: 'Josefin Sans', sans-serif;
 }
 header {
   height: 80px;
@@ -74,4 +74,12 @@ footer {
 }
 .horizontal_line  {
   border-bottom: 2px solid #f4f7f6;
+}
+.devise-content{
+  padding: 2%;
+  background: #ffffff;
+  border: 1px solid #888;
+}
+.padding-top-ten{
+  padding-top: 10px;
 }
