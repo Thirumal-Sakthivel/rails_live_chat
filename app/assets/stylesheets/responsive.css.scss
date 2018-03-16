@@ -1,0 +1,37 @@
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .devise-content{
+    margin-top: 5%;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .devise-content{
+    margin-top: 5%;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .devise-content{
+    margin: 5% auto 15% auto;
+    width: 35%;
+  }
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .devise-content{
+    margin: 5% auto 15% auto;
+    width: 35%;
+  }
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .devise-content{
+    margin: 5% auto 15% auto;
+    width: 35%;
+  }
+}
