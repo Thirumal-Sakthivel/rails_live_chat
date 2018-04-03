@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  resources :message_recipients
-  resources :user_groups
-  resources :groups
+  resources :conversations
   resources :messages
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

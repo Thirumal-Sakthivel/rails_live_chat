@@ -4,7 +4,8 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.includes(:user).for_display
+    @conversation = Conversation.where("(conversations.sender_id = ? AND conversations.receiver_id =?) OR (conversations.sender_id = ? AND conversations.receiver_id =?)", current_user.id, params[:userId].to_i, params[:userId].to_i, current_user.id)
+    @messages = @conversation.present? ? @conversation.first.messages.for_display : []
     @message = Message.new
     @user = User.find(params[:userId])
   end
@@ -26,20 +27,32 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @message = Message.new(message_params)
+    conversation = fetch_conversation(message_params[:sender_id], params[:receiver_id])
+    @message = conversation.messages.new(message_params)
 
     respond_to do |format|
       if @message.save
           ActionCable.server.broadcast 'room_channel',
                                    content:  @message.content,
                                    created_at: @message.message_time,
-                                   username: @message.user.full_name
+                                   username: @message.user.full_name,
+                                   sender_id: @message.sender_id.to_s,
+                                   receiver_id: params[:receiver_id]
         # format.html { redirect_to messages_path, notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
       else
         format.html { render :new }
         format.json { render json: @message.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def fetch_conversation(user_1, user_2)
+    conversation = Conversation.where("(conversations.sender_id = ? AND conversations.receiver_id =?) OR (conversations.sender_id = ? AND conversations.receiver_id =?)", user_1, user_2, user_2, user_1)
+    if conversation.present?
+      conversation.first
+    else
+      Conversation.create(sender_id: user_1, receiver_id: user_2)
     end
   end
 
@@ -75,6 +88,6 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:content, :sender_id, :status)
+      params.require(:message).permit(:content, :sender_id, :status, :conversation_id)
     end
 end

@@ -1,6 +1,7 @@
 <%= form_with(model: message, remote: true, class: "new_message") do |form| %>
 
-  <%= form.hidden_field :sender_id, value: current_user.id %>
+  <%= form.hidden_field :sender_id, value: current_user.id, id: "sender_id" %>
+  <%= hidden_field_tag :receiver_id, params[:userId] %>
 
   <div class="form-group">
     <%= form.text_area :content, id: :message_content, class: "message_content form-control", required: true %>

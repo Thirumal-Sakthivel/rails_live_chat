@@ -1,0 +1,16 @@
+<h1>Conversations</h1>
+ 
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Text</th>
+  </tr>
+ 
+  <% @conversations.each do |conversation| %>
+    <tr>
+      <td><%= conversation.sender_id %></td>
+      <td><%= conversation.receiver_id %></td>
+      <td><%= link_to 'Show', conversation_path(conversation) %></td>
+    </tr>
+  <% end %>
+</table>
